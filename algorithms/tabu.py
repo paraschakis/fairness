@@ -46,7 +46,10 @@ class Tabu:
         self.epsilons = [Epsilon(self.pref, self.probsame, np.zeros(i))
                          for i in range(probsame.size + 1)]
         self.tabu_list = []
+        self.rec_ids = rec_ids
+        self.pool_ids = pool_ids
         self.tabu_size = tabu_size
+        self.iterations = 0
 
     def is_tabu(self, item):
         if item in self.tabu_list:
@@ -114,6 +117,14 @@ class Tabu:
             self.pool.append(item)
         return
 
+    def restart(self):
+        self.iterations = 0
+        self.current = self.rec_ids.tolist()
+        self.pool = self.pool_ids.tolist()
+        self.tabu_list = []
+        self.tabu_size += 1
+        print('trying with tabu_size = {}'.format(self.tabu_size))
+
     def run(self, alpha, pref=None):
 
         # if pref is None:
@@ -121,6 +132,7 @@ class Tabu:
         # best_item = None
 
         while round(self.epsilon(self.current), 2) > round(alpha, 2):
+            self.iterations += 1
             neighborhood = self.get_neighbors()
             best_item, best_candidate = self.pick_best(neighborhood)
             self.current = best_candidate
@@ -128,6 +140,12 @@ class Tabu:
             self.tabu_list.append(best_item)
             if len(self.tabu_list) > self.tabu_size:
                 del self.tabu_list[0]
+
+            if self.iterations == 100:
+                print('limit reached, restarting...')
+                self.restart()
+                continue
+
         if self.return_ids:
             return sorted(self.current)
         else:

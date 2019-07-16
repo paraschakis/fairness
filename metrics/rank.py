@@ -20,7 +20,7 @@ def dice_similarity(s1, s2):
 def jaccard_similarity(s1, s2):
     return intersection(s1,s2)/(len(s1)+len(s2)-intersection(s1,s2))
 
-def f1(s1, s2): #reference ranking and evaluated ranking, respectively
+def f1(s1, s2): # s1: reference ranking, s2: evaluated ranking
     recall = intersection(s1,s2)/len(s1)
     precision = intersection(s1,s2)/len(s2)
     if 0.0 in (recall, precision):

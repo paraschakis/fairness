@@ -17,11 +17,14 @@ def plot_preference_vs_decision(df):
     # set plot settings
     plt.rcParams.update(plt.rcParamsDefault)
     plt.rcParams.update({'font.family': FONT_FAMILY,
-                         'xtick.labelsize': TICK_LABEL_SIZE,
-                         'ytick.labelsize': TICK_LABEL_SIZE,
+                         'xtick.labelsize': TICK_LABEL_SIZE + 2,
+                         'ytick.labelsize': TICK_LABEL_SIZE + 2,
                          'axes.titlesize': TITLE_SIZE,
-                         'axes.labelsize': AXES_LABEL_SIZE,
+                         'axes.labelsize': AXES_LABEL_SIZE + 2,
+                         'figure.autolayout': True,
+                         'axes.grid': False
                          })
+    plt.rcParams.update({})
 
     same = df['same_race'] == 1
     same_vs_imp_same = [(df[same].imp_same_race == i).sum() for i in range(1, 11)]
@@ -43,7 +46,10 @@ def plot_preference_vs_decision(df):
            log=True, hatch='////', label='same-race picks')
     ax.bar(x + 0.21, diff_vs_imp_same_dec, width=0.4, color=PALETTE1[2],
            log=True, hatch='////', label='different-race picks')
-    plt.legend(loc='best', prop={'size': LEGEND_SIZE})
+    # ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.22), ncol=2,  
+    #          prop={'size': LEGEND_SIZE + 2})
+    ax.legend(loc='upper right', ncol=2,  
+          prop={'size': LEGEND_SIZE})
     ax.set_xticks(x)
     ax.set_xlabel('same-race importance')
     ax.set_title('Racial distribution of dating partners')

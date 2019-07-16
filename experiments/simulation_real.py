@@ -55,11 +55,13 @@ import csv
 import sys
 import warnings
 
+INPUT_FILE = '../data/processed/speed_dating_religion.csv'
+
 if not sys.warnoptions:
     warnings.simplefilter("ignore")
 
 seed = 11
-np.random.seed(seed)
+np.random.seed = seed
 
 tune_threshold = True
 calibration = False
@@ -82,10 +84,10 @@ exp_happy = ['exp_happy', 'exp_happy_o']
 field = ['field','field_o']
 go = ['goal','go_date','go_out','goal_o','go_date_o','go_out_o']
 nominal_columns = ['race', 'race_o', 'goal', 'goal_o'] 
-to_drop = interests + nominal_columns + exp_happy
+to_drop = interests + exp_happy
 
-raw = load_data.raw()
-X, y = load_data.X_y_split(cols_to_drop=to_drop)
+# raw = load_data.raw(INPUT_FILE)
+X, y = load_data.X_y_split(file=INPUT_FILE, cols_to_drop=to_drop)
 
 p = sum(y)
 n = len(y) - p
@@ -108,8 +110,8 @@ clf_MLP = MLPClassifier(max_iter=100, random_state=seed)
 #clf_SVN = LinearSVC(class_weight='balanced', random_state=seed, max_iter=5000)
 
 # define classifiers
-#classifiers = [clf_random, clf_LR, clf_RF, clf_XGB, clf_NB]
-classifiers = [clf_XGB]
+classifiers = [clf_LR, clf_RF, clf_XGB, clf_NB]
+#classifiers = [clf_LR]
 
 # initialize results
 results = dict()
@@ -173,14 +175,14 @@ for wave in range(1, 22):
             results[name].at[user_id, 'y_true'] = y_test[user_slice]
             results[name].at[user_id, 'wave'] = wave
             results[name].at[user_id, 'same_r'] = \
-                        (X_test_df[user_slice]['same_race']).to_numpy()
+                        (X_test_df[user_slice]['same_religion']).to_numpy()
             results[name].at[user_id, 'imp_same_r'] = \
-                 X_test_df[user_slice]['imp_same_race'][0].astype(int)
+                 X_test_df[user_slice]['imp_same_rel'][0].astype(int)
             results[name].at[user_id,'threshold'] = threshold
-#            print()
+            # print()
 
 path = 'dumps/' 
-result_handler.process_results(results, save_dir=path, make_fair=True)
+result_handler.process_results(results, save_dir=path, make_fair=False)
 
 
 

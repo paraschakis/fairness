@@ -19,8 +19,10 @@ import time
 #scores = np.array([0.4,0.3,0.2,0.1,0.01,-0.01,-0.1,-0.2,-0.3,-0.4])
 #scores = np.array([0.9,0.8,0.7,0.6,0.51,0.89,0.70,0.60,0.80,0.80])
 scores = np.array([0.9,0.8,0.7,0.6,0.51,0.49,0.40,0.30,0.20,0.10])
-probsame = np.array([0,0,1,0,0,1,1,0,1,1])
+# probsame = np.array([0,0,1,0,0,1,1,0,1,1])
 #probsame = np.array([0.22,0.19,0.72,0.82,0.93,0.14,0.25,0.15,0.13,0.96])
+#scores = np.array([0.9,0.8,0.2])
+#probsame = np.array([0.22,0.19,0.72])
 
 #scores = np.array([0.1,0.71,0.83])
 #probsame = np.array([1,0,0])
@@ -31,11 +33,22 @@ probsame = np.array([0,0,1,0,0,1,1,0,1,1])
 #scores = np.array([0.1, 0.25, 0.37, 0.48, 0.8, 0.88, 0.92])
 #probsame = np.array([0.96, 0.68, 0.83, 0.67, 0.81, 0.27, 0.94])
 
-#scores = np.array([0.11,0.21,0.29,0.65,0.78,0.85,0.34,0.60,0.9,0.70,0.63,0.23,0.53,0.45,0.74,0.70,0.63,0.25,0.53,0.05])
-#probsame = np.array([0.42,0.49,0.19,0.22,0.65,0.98,0.35,0.93,0.05,0.21,0.72,0.07,0.86,0.11,0.53,0.79,0.23,0.57,0.13,0.84])
+# scores = np.array([0.11,0.21,0.29,0.65,0.78,0.85,0.34,0.60,0.9,0.70,0.63,0.23,0.53,0.45,0.74,0.70,0.63,0.25,0.53,0.05])
+# probsame = np.array([0.42,0.49,0.19,0.22,0.65,0.98,0.35,0.93,0.05,0.21,0.72,0.07,0.86,0.11,0.53,0.79,0.23,0.57,0.13,0.84])
 
+# scores = np.array([0.11,0.21,0.29,0.65,0.78,0.85,0.34,0.60,0.9,0.70,0.63,0.23,0.53,0.45])
 
+# probsame = np.array([0.1524, 0.1524, 0.1741, 0.1524, 0.171, 0.1524, 0.1524, 0.1524, 0.1524, 0.1524])
+# probsame = np.array([0.1524, 0.2165, 0.2165, 0.2165, 0.2165, 0.1524, 0.2165, 0.2165, 0.2165, 0.2165,
+#  0.2165, 0.1524, 0.1524, 0.1524])
 
+scores = np.array([0.47303393, 0.55332832, 0.42038028, 0.39601938, 0.33546198, 0.5555775,
+ 0.54613324, 0.41039186, 0.38963318, 0.49550251, 0.48535593, 0.42705415,
+ 0.61922272, 0.39276008, 0.39248431, 0.35331306, 0.30359172, 0.5737684,
+ 0.49877063, 0.559904])
+
+probsame = np.array([0.1079, 0.0915, 0.1079, 0.1079, 0.1079, 0.1079, 0.1135, 0.0915, 0.1079, 0.1079,
+ 0.1079, 0.0954, 0.1079, 0.1079, 0.0915, 0.1079, 0.1079, 0.0954, 0.1079, 0.0915])
 
 
 #scores = np.array([0.1,0.4,0.5,0.7])
@@ -49,7 +62,7 @@ probsame = np.array([0,0,1,0,0,1,1,0,1,1])
 #probsame = np.array([0.36, 0.59, 0.4])
 #pref = 0.19567502981497398
 
-pref = 0
+pref = 0.2
 #pref = 0.233
 b = 0.5
 
@@ -95,8 +108,8 @@ print('runtime: {}'.format(time.time()-start))
 '''
 
 start = time.time()
-#alg = Knapsack(pref, scores, probsame, b, prec=2, 
-#                        return_ids=True, rel_func=lambda w,s: w*s)
+# alg = Knapsack(pref, scores, probsame, b, prec=3,
+#                         return_ids=True, rel_func=lambda w,s: w*s)
 alg = Tabu(pref, scores, probsame, b, return_ids=True, rel_func=lambda w,s: w*s)
 #result_tabu = alg.run(pref=pref, alpha=0)
 #best_subset = alg_knapsack.run(pref=pref, alpha=0, capacity_interval=(2,3))
@@ -107,8 +120,9 @@ print('solution scores: {0}'.format(scores[ids]))
 print('solution probsame: {0}'.format(probsame[ids]))
 print('runtime: {}'.format(time.time()-start))
 #print(sum(best_subset-b))
-#e = Epsilon(pref, probsame, probsame[ids])
-#print('epsilon: {}'.format(e.score()))
+# ids = [0,1,2,3,4]
+e = Epsilon(pref, probsame, probsame[ids])
+print('epsilon: {}'.format(e.score()))
 
 '''
 e = Epsilon(pref, probsame, w1)

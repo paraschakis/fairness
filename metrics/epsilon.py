@@ -9,6 +9,7 @@ import itertools
 import matplotlib.pyplot as plt
 from config import *
 
+np.random.seed = 7
 
 class Epsilon:
     
@@ -81,14 +82,20 @@ class Epsilon:
         # return self.m_cand+pref*(self.m_max-self.m_cand)
 
     def visualize(self, prefs=None):
-
         if prefs is None:
             prefs = [self.pref]
         if self.subsets is None:
             self._generate_combinations()
 
-        plt.figure(figsize=(8, 6))
-        plt.rcParams.update({'font.family': FONT_FAMILY, 'font.size': FONT_SIZE})
+        plt.figure(figsize=(11, 6))
+        plt.rcParams.update({'font.family': FONT_FAMILY, 
+                     'font.size': FONT_SIZE,
+                     'xtick.labelsize': TICK_LABEL_SIZE + 4,
+                     'ytick.labelsize': TICK_LABEL_SIZE + 4,
+                     'axes.titlesize': TITLE_SIZE + 2,
+                     'axes.labelsize': AXES_LABEL_SIZE + 4,
+                     })
+        plt.rcParams.update({'figure.autolayout': True})
         # plt.rcParams.update({'text.usetex': True}) # enable latex mode
         plt.title('Unfairness penalty curves')
         plt.xlabel('solution mean (μ)')
@@ -99,14 +106,15 @@ class Epsilon:
             x, y = self._generate_plot_data(pref)
             score = self.score(pref)
             plt.plot(x, y, label='p=' + str(pref) + ', fairness=' + f"{(1 - score) * 100:.2f}" + '%',
-                     linewidth=LINE_WIDTH+1, linestyle=LINE_STYLES[i % len(LINE_STYLES)], markersize=MARKER_SIZE,
+                     linewidth=LINE_WIDTH+2, linestyle=LINE_STYLES[i % len(LINE_STYLES)], markersize=MARKER_SIZE,
                      color=PALETTE1[i % len(LINE_STYLES)])
-            plt.plot(np.mean(self.rec), score, 'or', markersize=MARKER_SIZE+4)  # plot m_rec point
+            plt.plot(np.mean(self.rec), score, 'or', markersize=MARKER_SIZE+5)  # plot m_rec point
             print('\n--------------- [pref = {}] ---------------\n'.format(pref))
             print(self.info)
             i += 1
 
-        plt.legend(loc='upper center', prop={'size': LEGEND_SIZE+2})
+        #plt.legend(loc='upper center', prop={'size': LEGEND_SIZE + 2})
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5), prop={'size': LEGEND_SIZE + 3})
         plt.grid(alpha=GRID_ALPHA)
         try:
             plt.savefig(OUTPUT_PATH + 'fairness_curve.' + SAVE_FORMAT, dpi=DPI, format=SAVE_FORMAT)

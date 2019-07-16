@@ -12,6 +12,8 @@ from metrics.relevance import Relevance
 import sys
 import heapq
 
+np.random.seed = 7
+
 class Knapsack:
     def __init__(self, pref, scores, probsame, 
                  b=0.5, prec=2, return_ids=False, rel_func=lambda x, y: x * y):
@@ -93,7 +95,7 @@ class Knapsack:
             #print(solution)
             if len(solution_ids) > 0:
                 rel = self.rel.score(self.scores[solution_ids]-m)
-                if rel >= best_rel:
+                if rel > best_rel:
                     best_rel = rel
                     best_ids = solution_ids
         if self.return_ids:

@@ -21,7 +21,7 @@ from metrics.epsilon_ss import Epsilon_ss
 
 # Settings
 np.random.seed = 7
-runs = 1000
+runs = 100
 start_size = 1
 end_size = 21
 alpha = 0
@@ -33,8 +33,8 @@ def sample(size):
     scores = np.sort(scores)
     if max(scores) < b:  # filter out bad samples
         return sample(size)
-    probsame = np.random.randint(0, 2, size)  # binary
-    # probsame = np.array(list(map(lambda x: round(x,2), np.random.rand(size))))
+#    probsame = np.random.randint(0, 2, size)  # binary
+    probsame = np.array(list(map(lambda x: round(x,2), np.random.rand(size))))  # continuous
     # pref = np.random.randint(0, 11)/10
     pref = np.random.rand()
     np.set_printoptions(precision=2)
@@ -50,10 +50,15 @@ def print_df(df, title):
 def plot(df, title, ylim=None, logy=False):
     print_df(df, title)
     i = len(df.columns) - 1
-    plt.figure(figsize=(6, 4))
+    plt.figure(figsize=(6, 5))
     plt.gcf().subplots_adjust(bottom=0.15)
     plt.rcParams.update({'font.family': FONT_FAMILY, 'font.size': FONT_SIZE,
-                         'axes.titlesize': TITLE_SIZE-2,})
+                         'xtick.labelsize': TICK_LABEL_SIZE + 2,
+                         'ytick.labelsize': TICK_LABEL_SIZE + 2,
+                         'axes.titlesize': TITLE_SIZE + 4,
+                         'axes.labelsize': AXES_LABEL_SIZE + 4,                        
+                         'figure.autolayout': True,                         
+                         })
     size = list(range(start_size, end_size + 1))
     for column in df:
         means = np.mean(df[column].tolist(), axis=1)
@@ -68,7 +73,7 @@ def plot(df, title, ylim=None, logy=False):
         plt.gca().yaxis.set_major_formatter(ScalarFormatter())  # remove scientific notation
     if ylim:
         plt.ylim(ylim[0], ylim[1])
-    plt.legend(loc=(0.3, 0.20), prop={'size': LEGEND_SIZE})
+    plt.legend(loc=(0.3, 0.21), prop={'size': LEGEND_SIZE+4})
     plt.xlabel('Size')
     plt.title(title)
     plt.grid(alpha=GRID_ALPHA)
@@ -77,6 +82,9 @@ def plot(df, title, ylim=None, logy=False):
 
 
 def run():
+#    algos = {Exhaustive: {},
+#             Tabu: {'tabu_size': 1},
+#             Knapsack: {'prec': 2}}
     algos = {Exhaustive: {},
              Tabu: {'tabu_size': 1},
              Knapsack: {'prec': 2}}

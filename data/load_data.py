@@ -68,17 +68,17 @@ def preprocess(df):
 # data access methods
 # =============================================================================
 
-def raw():
-    return pd.read_csv(os.path.abspath(INPUT_FILE))
+def raw(file=INPUT_FILE):
+    return pd.read_csv(os.path.abspath(file))
 
 # indexed, formatted, some missing values handled
-def processed():
-    return preprocess(raw())
+def processed(file=INPUT_FILE):
+    return preprocess(raw(file))
 
 
 # processed and prepared for machine learning
-def X_y_split(cols_to_drop=None):
-    df = processed()
+def X_y_split(file=INPUT_FILE, cols_to_drop=None):
+    df = processed(file)
     to_drop = ['like', 'dec']
     if cols_to_drop:
         to_drop += cols_to_drop
@@ -94,9 +94,9 @@ self_eval = ['attr','sinc','fun','int','amb']
 
 outcomes = ['like', 'dec']
 
-R = raw()
-P = processed()
-X, y = X_y_split(interests)
+# R = raw()
+# P = processed()
+# X, y = X_y_split(interests)
 
 
 

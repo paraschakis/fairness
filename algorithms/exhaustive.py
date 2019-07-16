@@ -15,6 +15,7 @@ from itertools import tee
 from collections import Counter
 import heapq
 
+np.random.seed = 7
 
 # For alpha=0, the best subset can be retrieved directly and very quickly from Epsilon.
 # However, there can be several elements with same values of probsame,
