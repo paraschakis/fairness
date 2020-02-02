@@ -61,20 +61,6 @@ def transform(X_train_df, y_train_df, X_test_df, y_test_df, clf,
         X_train = feature_selector.fit_transform(X_train, y_train)
         X_test = feature_selector.transform(X_test)
         print('best params: {}'.format(grid.best_params_))
-        
-#        try: 
-#            sfm = SelectFromModel(clf, threshold='mean')
-#            X_train = sfm.fit_transform(X_train, y_train)
-#            X_test = sfm.transform(X_test)
-#        except ValueError:
-#            reduce_dim_pipe = Pipeline([('reduce_dim', None),
-#                                          ('classify', clf)])
-#            grid = tuning.reduce_dim_grid(reduce_dim_pipe)
-#            grid.fit(X_train, y_train)
-#            feature_selector = grid.best_estimator_.named_steps['reduce_dim']
-#            X_train = feature_selector.fit_transform(X_train, y_train)
-#            X_test = feature_selector.transform(X_test)           
-      
     return X_train, y_train, X_test, y_test
 
 def tune_threshold(X_train, y_train, clf):
@@ -96,7 +82,6 @@ def tune_threshold(X_train, y_train, clf):
                 best_threshold = threshold
                 best_score = score
         thresholds.append(best_threshold)
-#        print('threshold: {}'.format(best_threshold))
     threshold = sum(thresholds) / folds
     print('optimal threshold: {}'.format(threshold))
     return threshold

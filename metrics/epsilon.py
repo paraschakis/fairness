@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Calculates epsilon measure, taking values from 0 (best) to 1 (worst).
-The numerical precision has a significant impact on the accuracy.
-For prec > 3, exhaustive and knapsack seem to correlate well.
 """
 import numpy as np
 import itertools
 import matplotlib.pyplot as plt
 from config import *
-
-np.random.seed = 7
 
 class Epsilon:
     
@@ -26,8 +22,6 @@ class Epsilon:
         self.prec = prec
         self.m_cand = np.mean(self.cand)
         sorted_cand = np.sort(self.cand)
-        # self.m_min = np.mean(sorted_cand[:rec.size])
-        # self.m_max = np.mean(sorted_cand[-rec.size:])
         self.m_min = round(np.mean(sorted_cand[:self.rec.size]), self.prec)
         self.m_max = round(np.mean(sorted_cand[-self.rec.size:]), self.prec)
         self.means = None
@@ -96,7 +90,6 @@ class Epsilon:
                      'axes.labelsize': AXES_LABEL_SIZE + 4,
                      })
         plt.rcParams.update({'figure.autolayout': True})
-        # plt.rcParams.update({'text.usetex': True}) # enable latex mode
         plt.title('Unfairness penalty curves')
         plt.xlabel('solution mean (μ)')
         plt.ylabel('unfairness penalty (ε)')
@@ -113,7 +106,6 @@ class Epsilon:
             print(self.info)
             i += 1
 
-        #plt.legend(loc='upper center', prop={'size': LEGEND_SIZE + 2})
         plt.legend(loc='center left', bbox_to_anchor=(1, 0.5), prop={'size': LEGEND_SIZE + 3})
         plt.grid(alpha=GRID_ALPHA)
         try:

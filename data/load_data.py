@@ -12,11 +12,7 @@ def preprocess(df):
     df.dropna(subset=subset, inplace=True)
     df.pid = df.pid.astype(int)
 
-    # df['age_diff'] = df['age'] - df['age_o']
-
     # impute missing data that is not required to be done in a pipeline
-    # impute.impute_missing(df)
-
     # pf_o_att, pf_o_fun, pf_o_amb, pf_o_sin, pf_o_sha, pf_o_int
     # one person with these attributes missing is a 26 y.o. white girl (id=28)
     # for each attribute, get the mean from similar people (white females 26)
@@ -59,9 +55,6 @@ def preprocess(df):
     # set multiindex
     df.set_index(['iid', 'pid', 'wave'], inplace=True)
 
-    # set the correct data type for some columns
-    # df['age'] = df['age'].astype('int64')
-    # df['age_o'] = df['age_o'].astype('int64')
     return df
 
 # =============================================================================
@@ -93,26 +86,3 @@ interests = ['sports','tvsports','exercise','dining','museums','art',
 self_eval = ['attr','sinc','fun','int','amb']
 
 outcomes = ['like', 'dec']
-
-# R = raw()
-# P = processed()
-# X, y = X_y_split(interests)
-
-
-
-
-
-
-
-
-#def encode_features(df):
-#    category_mapper = {'Almost never': 0,
-#                       'Several times a year': 1,
-#                       'Once a month': 2,
-#                       'Twice a month': 3,
-#                       'Once a week': 4,
-#                       'Twice a week': 5,
-#                       'Several times a week': 6}
-#    df['go_date'] = df['go_date'].map(category_mapper)
-#    df['go_out'] = df['go_out'].map(category_mapper)
-#    return pd.get_dummies(df)

@@ -39,14 +39,11 @@ class ClassifierResult:
         self.fairness = 0
         self.fairness_lb = 0 # lower bound (fairness of informative recommendations)
         self.fairness_after = 0
-        # self.algorithm = None
         self.reranker = 'Knapsack' if reranker==None else reranker
         self._process_df(df)
     
     def _process_df(self, df):
-        threshold = df['threshold'].iloc[0] # 0.5
-#        if np.isnan(threshold):
-#            threshold = 0.5
+        threshold = df['threshold'].iloc[0]
         y_true = []
         y_proba = []
         y_pred_fair = []
@@ -63,7 +60,7 @@ class ClassifierResult:
         fairness_count = 0
         fairness_count_lb = 0
         print('Re-ranker: {}'.format(self.reranker))
-        for row in df.itertuples(): # row corresponds to a user
+        for row in df.itertuples():  # row corresponds to a user
             print("\rAnalyzing user {0}/{1}... ".format(f1_count, len(df)), 
                   end="", flush=True)
             y_true.extend(row.y_true)
@@ -82,7 +79,6 @@ class ClassifierResult:
                     fairness_count_lb += 1
                 # calculate macro-f1
                 y_pred = mask.astype(int)
-#                if sum(row.y_true) > 0:
                 f1_sum += f1_score(row.y_true, y_pred)
                 f1_count += 1
                 if self.make_fair:
@@ -233,7 +229,6 @@ def process_results(output_dict, save_dir=False, make_fair=True,
 
 
 def load_results(path=PATH, clf_list=CLF_LIST):
-    # path = PATH if path == None else path
     outputs = dict()
     filenames = clf_list if clf_list else listdir(path)
     for filename in filenames:
@@ -275,8 +270,7 @@ def plot_alphas(alphas, results, reranker, save_figure=False):
     ax.set_title(f'F1 vs. fairness ({reranker})')
 
     x = list(map(lambda x: round((1-x)*100), alphas))
-#    y = list(map(lambda r: [clf.f1_macro_fair for clf in r], results))
-    
+
     i = len(results)-1
     for name, data in results.items():
         if name == 'RandomForestClassifier':
@@ -318,34 +312,3 @@ if __name__ == '__main__':
                       results,
                       'Tabu',
                       save_figure=False)
-
-
-
-
-
-# if __name__ == '__main__':
-    # clf_list = ['LogisticRegression', 'RandomForestClassifier', 'XGBClassifier', 'GaussianNB']
-    # main(clf_list)
-
-
-#    test_df = pd.DataFrame(columns=['iid', 'wave', 'y_proba', 'y_true', 
-#                               'same_r', 'imp_same_r', 'threshold'], dtype=object)
-#    test_df = test_df.set_index(['iid'])
-#    
-#    test_df.at[1, 'y_proba'] = np.array([0.3, 0.1, 0.2, 0.7, 0.5, 0.7])
-#    test_df.at[1, 'y_true'] = np.array([0, 0, 0, 1, 1, 1])
-#    test_df.at[1, 'wave'] = 1
-#    test_df.at[1, 'same_r'] = np.array([1, 0, 0, 0, 1, 0])
-#    test_df.at[1, 'imp_same_r'] = 1
-#    test_df.at[1, 'threshold'] = 0.5
-#    
-#    test_df.at[2, 'y_proba'] = np.array([0.7, 0.8, 0.6, 0.5, 0.1, 0.3])
-#    test_df.at[2, 'y_true'] = np.array([1, 1, 1, 1, 0, 0])
-#    test_df.at[2, 'wave'] = 1
-#    test_df.at[2, 'same_r'] = np.array([1, 0, 0, 0, 1, 0])
-#    test_df.at[2, 'imp_same_r'] = 1
-#    test_df.at[2, 'threshold'] = 0.5    
-#    
-#    results = {'test_classifier': test_df}
-#    
-#    process_results(results, make_fair=True)    

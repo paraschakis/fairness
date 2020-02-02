@@ -4,10 +4,9 @@ from data.imputers import Imputer, AgeImputer, GoDateImputer
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import Pipeline
 from sklearn.base import TransformerMixin
-from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
+from sklearn.preprocessing import RobustScaler
 from sklearn.preprocessing import OrdinalEncoder, OneHotEncoder
 from sklearn.preprocessing import FunctionTransformer
-from sklearn.preprocessing import KBinsDiscretizer
 
 class Discretizer(TransformerMixin):
     def __init__(self, columns, num_bins=5):
@@ -24,9 +23,8 @@ class Discretizer(TransformerMixin):
     def transform(self, df):
         X = df.copy()
         for column in self.columns:
-#            print (f'{column}: {self.column_bins[column]}')
             X[column] = pd.cut(X[column], self.column_bins[column], labels=False)
-        X.fillna(value=0.0, inplace=True) # assign all out-of-bounds values to bin 0
+        X.fillna(value=0.0, inplace=True)
         return X
     
 
@@ -34,13 +32,10 @@ class Discretizer(TransformerMixin):
 def impute():
     mean_imp_columns = ['attr', 'sinc', 'fun', 'int', 'amb', 'int_corr',
                         'attr_o', 'sinc_o', 'fun_o', 'int_o', 'amb_o']
-#    mode_imp_columns = ['exp_happy', 'exp_happy_o']
     mean_imputer = Imputer(columns=mean_imp_columns, strategy='mean')
-#    mode_imputer = Imputer(columns=mode_imp_columns, strategy='most_frequent')
     imputation_pipe = Pipeline([('age_imputer', AgeImputer()),
                                 ('go_date_imputer', GoDateImputer()),
                                 ('mean_imputer', mean_imputer),
-#                                ('mode_imputer', mode_imputer)
                                 ])
     return imputation_pipe
 
@@ -63,8 +58,6 @@ def encode(df):
                            'Several times a week']] * 4
 
     ordinal_columns = ['go_date', 'go_out', 'go_date_o', 'go_out_o']
-#    nominal_columns = ['gender', 'race', 'race_o', 
-#                       'goal', 'goal_o', 'field', 'field_o']
     nominal_columns = ['gender', 'race', 'race_o', 'goal', 'goal_o']
                            
     numeric_columns = df.select_dtypes(include='float64').columns.tolist()
@@ -81,7 +74,6 @@ def encode(df):
         for i in range(len(nominal_columns) - 1):
             column = nominal_columns[i]
             num_dummies = df_X[column].nunique()
-            # print(f'{column} unique values: {num_dummies}')
             index += num_dummies
             indices.append(index)
         X = np.delete(X, indices, axis=1)
@@ -103,7 +95,6 @@ def encode(df):
         (nominal_pipe, nominal_columns),
         (ordinal_pipe, ordinal_columns),
         (RobustScaler(), numeric_columns),
-#        (KBinsDiscretizer(n_bins=4, encode='ordinal'), numeric_columns),
         remainder='passthrough')
 
     return column_transformer
@@ -114,7 +105,6 @@ def make_pipeline(df):
     column_transformer = encode(df)
     discretization_pipe = discretize(df)
     transformation_pipe = Pipeline([('impute', imputation_pipe),
-#                                    ('discretize', discretization_pipe),
                                    ('encode', column_transformer)
                                    ])
     return transformation_pipe

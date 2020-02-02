@@ -12,10 +12,12 @@ from metrics.relevance import Relevance
 import sys
 import heapq
 
-np.random.seed = 7
 
 class Knapsack:
-    def __init__(self, pref, scores, probsame, 
+    """
+    Knapsack with cardinality and dual capacity contstraints (i.e. lower and upper)
+    """
+    def __init__(self, pref, scores, probsame,
                  b=0.5, prec=2, return_ids=False, rel_func=lambda x, y: x * y):
         self.return_ids = return_ids
         self.scores = np.copy(scores)
@@ -60,14 +62,6 @@ class Knapsack:
         return self.T[n,u,k]
 
     def run(self, alpha, pref=None):
-        # check if the rec.set is already fair
-#        e = Epsilon(pref, self.probsame, self.probsame_rec)
-#        if e.score() <= alpha:
-#            if self.return_ids:
-#                return sorted(self.rec_ids)
-#            else:
-#                return self.scores[self.rec_ids] 
-        
         if pref is None:
             pref = self.pref
         m = sum(self.scores) # additive constant to enforce k-sized solutions
@@ -77,7 +71,6 @@ class Knapsack:
         for k in range(1, self.probsame.size+1):
             n = self.probsame.size
             e = Epsilon(pref, self.probsame, self.probsame[:k])
-#            e = Epsilon1(pref, self.probsame, self.probsame[:k], prec_numeric=13, prec_knapsack=1)
             m_lower, m_upper = e.alpha_bounds(alpha)
             l = round(m_lower*k).astype(int) # lowest capacity
             u = round(m_upper*k).astype(int) # highest capacity
@@ -85,14 +78,12 @@ class Knapsack:
             self.knapsack(n, k, l, u)
             # reconstruct
             solution_ids = []
-            #print('solution for k = {}'.format(k))
             if self.T[n,u,k] >= k*m: #check if solution exists
                 for n in reversed(range(1, self.probsame.size+1)):
                     if self.T[n,u,k] != self.T[n-1,u,k]:
                         solution_ids.append(n-1)
                         u -= self.probsame[n-1]
                         k -= 1
-            #print(solution)
             if len(solution_ids) > 0:
                 rel = self.rel.score(self.scores[solution_ids]-m)
                 if rel > best_rel:
@@ -102,30 +93,3 @@ class Knapsack:
             return sorted(best_ids)
         else:
             return self.scores[best_ids]-m
-#        return np.asarray(sorted(best_solution))
-
-
-            
-        '''
-        e = Epsilon(pref, self.probsame, self.probsame_rec)
-        m_lower, m_upper = e.alpha_bounds(alpha) # lower and upper bound
-        k = self.probsame_rec.size #cardinality constraint
-        n = self.probsame.size
-        m = sum(self.scores) # number to add to scores (for exact-k KP)
-        self.scores += m
-        l = round(m_lower*k).astype(int) # lowest capacity
-        u = round(m_upper*k).astype(int) # highest capacity
-        self.T = [[[0 for _ in range(k+1)] for _ in range(u+1)] for _ in range(n+1)]
-        self.knapsack(n, k, l, u)
-        # reconstruct
-        solution = []
-        if self.T[n][u][k] >= k*m: #check if solution exists
-            for n in reversed(range(1, self.probsame.size+1)):
-                if self.T[n][u][k] != self.T[n-1][u][k]:
-                    solution.append(self.scores[n-1]-m)
-                    u -= self.probsame[n-1]
-                    k -= 1
-        #print(self.T)
-        print(self.rel.score(np.asarray(solution)))
-        return np.asarray(solution)
-        '''

@@ -3,10 +3,6 @@ import numpy as np
 from data import load_data
 import seaborn as sns
 import matplotlib.pyplot as plt
-from matplotlib.ticker import ScalarFormatter
-from matplotlib import gridspec
-from sklearn import linear_model
-from statsmodels.graphics.mosaicplot import mosaic
 from config import *
 
 
@@ -54,7 +50,6 @@ def plot_preference_vs_decision(df):
     ax.set_xlabel('same-race importance')
     ax.set_title('Racial distribution of dating partners')
     ax.set_facecolor('1.0')
-    # plt.gca().yaxis.set_major_formatter(ScalarFormatter())
     plt.savefig(OUTPUT_PATH + 'partner_distribution' + f'.{SAVE_FORMAT}', dpi=DPI,
                 format=SAVE_FORMAT)
     plt.show()

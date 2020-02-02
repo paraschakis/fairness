@@ -13,15 +13,11 @@ import sys
 
 class Tabu:
     """
-    Simplified tabu search
-    Without keeping track of solutions or iterations
-    Works well for binary data
+    Tabu search
     """
 
     def __init__(self, pref, scores, probsame, b=0.5, 
                  tabu_size=2, return_ids=False, rel_func=lambda x, y: x * y):
-#        sort = sorted(zip(scores, probsame))
-#        self.scores, self.probsame = map(np.array, zip(*sort))
         self.scores = np.copy(scores)
         self.probsame = np.copy(probsame)
         
@@ -95,10 +91,6 @@ class Tabu:
             solution.remove(item)
         else:
             solution.insert(0, item)
-            '''
-            if len(self.current) == 1: # consider substitution
-                solution = [item]
-            '''
         return solution
 
     def m_current(self):
@@ -126,11 +118,6 @@ class Tabu:
         print('trying with tabu_size = {}'.format(self.tabu_size))
 
     def run(self, alpha, pref=None):
-
-        # if pref is None:
-        #     pref = self.pref
-        # best_item = None
-
         while round(self.epsilon(self.current), 2) > round(alpha, 2):
             self.iterations += 1
             neighborhood = self.get_neighbors()
