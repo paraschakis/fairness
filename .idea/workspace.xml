@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85b726d2-08cb-4f94-940b-fccef5c8fd01" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/experiments/plots/fairness_curve.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/plots/fairness_curve.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/workspace.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.spyproject/workspace.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/result_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/result_handler.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/algorithms/knapsack.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1691">
-              <caret line="94" column="31" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
+            <state relative-caret-position="1729">
+              <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -36,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/metrics/epsilon_ss.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+            <state relative-caret-position="375">
+              <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -45,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/metrics/epsilon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1976">
-              <caret line="107" selection-start-line="107" selection-end-line="107" />
+            <state relative-caret-position="2109">
+              <caret line="114" selection-start-line="114" selection-end-line="114" />
               <folding>
                 <element signature="e#230#248#0" expanded="true" />
               </folding>
@@ -176,7 +178,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../streaming/multiflow" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyDebuggerOptionsProvider">
@@ -408,7 +410,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49564135" visible="true" weight="0.1988273" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49564135" visible="true" weight="0.15351813" />
       <window_info id="Structure" order="1" sideWeight="0.50435865" side_tool="true" weight="0.13907285" />
       <window_info id="Favorites" order="2" sideWeight="0.50332224" side_tool="true" weight="0.12802951" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -421,7 +423,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" x="-62" y="382" width="1898" height="305" id="Python Console" order="3" visible="true" weight="0.25479743" />
+      <window_info anchor="right" x="-62" y="382" width="1898" height="305" id="Python Console" order="3" visible="true" weight="0.25426438" />
       <window_info anchor="right" id="Terminal" order="4" weight="0.22974414" />
       <window_info anchor="right" id="Debug" order="5" weight="0.21052632" />
       <window_info anchor="right" auto_hide="true" x="28" y="108" width="1892" height="346" id="Run" internal_type="SLIDING" order="6" type="SLIDING" weight="0.30847865" />
@@ -515,13 +517,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/fair/Lib/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/envs/fair/Lib/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py" />
     <entry file="file://$PROJECT_DIR$/data/impute.py" />
     <entry file="file://$PROJECT_DIR$/@/encoders.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -542,7 +538,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/robin/recommender.py" />
-    <entry file="file://$PROJECT_DIR$/../Ziff/task 1/grid_search_sequential.py">
+    <entry file="file://$PROJECT_DIR$/../ziff/task 1/grid_search_sequential.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1843">
           <caret line="107" column="52" selection-start-line="107" selection-start-column="52" selection-end-line="107" selection-end-column="52" />
@@ -648,25 +644,11 @@
     <entry file="file://$PROJECT_DIR$/data/processed/dataset_Robin.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../dds/exam/ucb_c.py">
+    <entry file="file://$PROJECT_DIR$/../dds/exam/ucb_c.py" />
+    <entry file="file://$PROJECT_DIR$/../dds/exam/ucb_h.py" />
+    <entry file="file://$PROJECT_DIR$/../dds/exam/simulator.py" />
+    <entry file="file://$PROJECT_DIR$/../dds/UCB/ucb.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dds/exam/ucb_h.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="37" lean-forward="true" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dds/exam/simulator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/@/knapsack_original.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -677,15 +659,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/algorithms/knapsack.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1691">
-          <caret line="94" column="31" selection-start-line="94" selection-start-column="31" selection-end-line="94" selection-end-column="31" />
+        <state relative-caret-position="1729">
+          <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/metrics/epsilon.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1976">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        <state relative-caret-position="2109">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
           <folding>
             <element signature="e#230#248#0" expanded="true" />
           </folding>
@@ -716,13 +698,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../dds/UCB/ucb.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/metrics/epsilon_ss.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        <state relative-caret-position="375">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>

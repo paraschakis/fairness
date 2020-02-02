@@ -96,16 +96,16 @@ clf_random = DummyClassifier(strategy='stratified', random_state=seed)
 #clf_all1 = DummyClassifier(strategy='constant', constant=1, random_state=seed)
 clf_LR = LogisticRegression(solver='liblinear', class_weight='balanced', 
                             random_state=seed)
-clf_KNN = KNeighborsClassifier(n_jobs=-1)
-clf_QDA = QuadraticDiscriminantAnalysis()
+# clf_KNN = KNeighborsClassifier(n_jobs=-1)
+# clf_QDA = QuadraticDiscriminantAnalysis()
 clf_NB = GaussianNB()
 clf_RF = RandomForestClassifier(n_estimators=100, max_depth=3, 
                                 class_weight='balanced', random_state=seed, 
                                 criterion='gini', n_jobs=-1)
 clf_XGB = XGBClassifier(random_state=seed, n_estimators=300, scale_pos_weight=n/p)
 #clf_XGB = XGBClassifier(random_state=seed)
-clf_GB = GradientBoostingClassifier(random_state=seed)
-clf_MLP = MLPClassifier(max_iter=100, random_state=seed)
+# clf_GB = GradientBoostingClassifier(random_state=seed)
+# clf_MLP = MLPClassifier(max_iter=100, random_state=seed)
 #clf_NN = KerasClassifier(build_fn=None, epochs=50, batch_size=20, verbose=1)
 #clf_SVN = LinearSVC(class_weight='balanced', random_state=seed, max_iter=5000)
 
@@ -181,7 +181,7 @@ for wave in range(1, 22):
             results[name].at[user_id,'threshold'] = threshold
             # print()
 
-path = 'dumps/' 
+path = 'dumps/'
 result_handler.process_results(results, save_dir=path, make_fair=False)
 
 

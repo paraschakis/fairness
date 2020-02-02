@@ -11,7 +11,6 @@ from algorithms.tabu import Tabu
 from data import load_data
 from config import *
 from math import *
-# import tqdm # generates a progress bar for a loop - haven't test it yet
 
 # ignore warnings
 import warnings
@@ -301,7 +300,7 @@ def plot_alphas(alphas, results, reranker, save_figure=False):
 
 # experiment: test re-rankers for various values of alpha
 def experiment_alphas(alphas, outputs, reranker, save_figure=True):
-    results = defaultdict(list)WW
+    results = defaultdict(list)
     for alpha in alphas:
         print('alpha: {}'.format(alpha))
         clf_results = process_results(outputs, make_fair=True,
@@ -311,16 +310,14 @@ def experiment_alphas(alphas, outputs, reranker, save_figure=True):
     plot_alphas(alphas, results, reranker, save_figure=save_figure)
 
 
-# results = load_results()
-results = load_results_religion('dumps/religion/')
-# process_results(results, reranker='Tabu')
-experiment_alphas([1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0],
-                  results,
-                  'Tabu',
-                  save_figure=False)
-
-
-
+if __name__ == '__main__':
+    # results = load_results()
+    results = load_results_religion('dumps/religion/')
+    # process_results(results, reranker='Tabu')
+    experiment_alphas([1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0],
+                      results,
+                      'Tabu',
+                      save_figure=False)
 
 
 
