@@ -12,8 +12,8 @@ import numpy as np
 class Relevance:
 
     def __init__(self, scores, b=0.5, func=lambda x, y: x * y):
-        self.scores = scores
-        self.b = b
+        self.scores = scores  # prediction scores
+        self.b = b  # classification threshold
         self.rec_size = np.count_nonzero(scores >= b)
         self.func = func
 
