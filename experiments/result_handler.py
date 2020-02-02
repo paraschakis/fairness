@@ -16,7 +16,7 @@ from math import *
 import warnings
 warnings.filterwarnings("ignore")
 
-PATH = 'dumps/y=match (feat_sel tuning) FINAL/'
+PATH = 'dumps/race/'
 CLF_LIST = ['LogisticRegression', 'RandomForestClassifier', 'XGBClassifier', 'GaussianNB']
 
 class ClassifierResult:
@@ -39,7 +39,10 @@ class ClassifierResult:
         self.fairness = 0
         self.fairness_lb = 0 # lower bound (fairness of informative recommendations)
         self.fairness_after = 0
-        self.reranker = 'Knapsack' if reranker==None else reranker
+        if reranker in ['Knapsack', 'Tabu']:
+            self.reranker = reranker
+        else:
+            self.reranker = 'Knapsack'
         self._process_df(df)
     
     def _process_df(self, df):
@@ -305,10 +308,11 @@ def experiment_alphas(alphas, outputs, reranker, save_figure=True):
 
 
 if __name__ == '__main__':
-    # results = load_results()
-    results = load_results_religion('dumps/religion/')
-    # process_results(results, reranker='Tabu')
-    experiment_alphas([1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0],
-                      results,
-                      'Tabu',
-                      save_figure=False)
+    results = load_results()
+    process_results(results, reranker='Tabu')
+    # accuracy across fairness levels
+    # results = load_results_religion('dumps/religion/')
+    # experiment_alphas([1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0],
+    #                   results,
+    #                   'Tabu',
+    #                   save_figure=False)

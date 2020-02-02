@@ -6,7 +6,6 @@ Created on Tue Jan 29 21:33:51 2019
 """
 import numpy as np
 from metrics.epsilon import Epsilon
-from metrics.epsilon_ss import Epsilon_ss
 from metrics.relevance import Relevance
 import sys
 
