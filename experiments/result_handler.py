@@ -22,7 +22,6 @@ CLF_LIST = ['LogisticRegression', 'RandomForestClassifier', 'XGBClassifier', 'Ga
 class ClassifierResult:
     
     def __init__(self, name, df, make_fair=True, reranker=None, alpha=0):
-#        self.num_users = len(next(iter(result_dict.values())))
         self.make_fair = make_fair
         self.alpha = alpha  # fairness threshold (used only when make_fair=True)
         self.name = name
